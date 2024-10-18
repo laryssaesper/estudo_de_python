@@ -1,19 +1,19 @@
 import smtplib
 #pobretech@gmail.com
+def mailsender():
+    email=str(input("Remetente: "))
+    emailDestino=str(input("Destinatário: "))
+    assunto=str(input("Assunto: "))
+    corpo=str(input("Corpo: "))
 
-email=str(input("Remetente: "))
-emailDestino=str(input("Destinatário: "))
+    mensagem=f"Subject: {assunto}\n\n{corpo}"
 
-assunto=str(input("Assunto: "))
-corpo=str(input("Corpo: "))
+    try:
+        server=smtplib.SMTP("smtp.gmail.com", 587)
+        server.starttls()
+        server.login(email, "google password")
+        server.sendmail(email, emailDestino, mensagem)
+        print("E-mail enviado com sucesso para: ", emailDestino)
 
-mensagem=f"Assunto: {assunto}\n\n{corpo}"
-
-server=smtplib.SMTP("smtp.gmail.com", 587)
-server.starttls()
-
-server.login(email, "bpyw isbg iwtk icvv")
-
-server.sendmail(email, emailDestino, mensagem)
-
-print("E-mail enviado com sucesso para: ", emailDestino)
+    except Exception as e:
+        print("E-mail enviado com sucesso para: ", emailDestino, e)
